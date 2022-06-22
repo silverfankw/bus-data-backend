@@ -1,4 +1,4 @@
-const coHandler = require("./companyHandler")
+const coHandler = require("./coHandler")
 const stopHandler = require("./stopHandler")
 
 
@@ -11,17 +11,15 @@ const buildRoute = rt => (
   }
 )
 
-const buildRouteDetails = rt => {
-  console.log(rt.stops)
-  return (
+const buildRouteDetails = (rt, selectedCo) => (
   {
     co: coHandler.joinCompany(rt.co),
     route: rt.route,
+    bound: rt.bound[selectedCo] === "I" ? "inbound" : rt.bound[selectedCo] === "O" ? "Outbound" : rt.bound[selectedCo],
     orig: rt.orig,
     dest: rt.dest,
-    stops: stopHandler.translate(rt.stops[rt.co[0]])
+    stops: stopHandler.batchTranslate(rt.stops[selectedCo], rt.fares)
   }
 )
-}
 
 module.exports = {buildRoute, buildRouteDetails}

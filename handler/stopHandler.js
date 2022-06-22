@@ -1,8 +1,8 @@
 const _ = require("lodash")
+const fare = require("./fareHandler")
 
-const translate = stopID => {
-  // console.log(stopID)
-  return data.stopMap[stopID]
-}
+const batchTranslate = (stopIDs, fares) => stopIDs.map((stopID, i) => _.extend(translate(stopID), fare.getFareByIndex(i, fares)))
 
-module.exports = { translate }
+const translate = stopID => _.pick(data.stopList[stopID], "name")
+
+module.exports = { translate, batchTranslate }

@@ -18,15 +18,19 @@ const init = app => {
 
   // Route Details
   app.get("/routes/details", (req, res) => {
-    const {co, route} = req.query
 
     if (_.isEmpty(req.query)) {
-      res.statusMessage = "co & route are required."
+      res.statusMessage = "co & route parameters are required."
       res.status(400).end()
     }
 
+    const {co, route, bound = 'O'} = req.query
+    const query = {co: co.trim().split(","), route: route.trim().toUpperCase(), bound: {[co]: bound}}
+
     const rtList = 
-      _.map(_.filter(Object.values(data.routeList), {...req.query, co: co.split(",")}), rtHandler.buildRouteDetails)
+      _.map(
+        _.filter(Object.values(data.routeList), query), 
+        rt => rtHandler.buildRouteDetails(rt, co))
     
     res.json(rtList)
   })
@@ -36,11 +40,10 @@ const init = app => {
   app.get("/stops", (req, res) => {
     const { name } = req.query
 
-    const stopList = _.isEmpty(name) ?
-      Object.values(data.stopList) :
+    const stopList = _.isEmpty(name) ? Object.values(data.stopList) :
       _.filter(Object.values(data.stopList), stop => stop.name.zh.match(`${name}`) || stop.name.en.match(`${name}`))
 
-      res.json(stopList)
+    res.json(stopList)
   }) 
 
   console.log("Endpoints Initialized.")
