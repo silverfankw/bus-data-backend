@@ -1,8 +1,11 @@
 const express = require('express')
 const LZUTF8 = require('lzutf8')
+
 const cfg = require('./config')
 const route = require("./route")
+const { printRt } = require('./handler/routeHandler')
 const app = express()
+
 
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
@@ -12,9 +15,11 @@ const setup = async () => {
 
 setup().then(data => {
   app.listen(cfg.port,  () => {
-    // console.log(Object.values(data.routeList))
     route.init(app)
     console.log(`Server running at port ${cfg.port}...`)
     global.data = data
+    
+    // console.log(Object.keys(data))
+    printRt("A31")
   })
 })

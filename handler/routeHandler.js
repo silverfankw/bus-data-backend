@@ -1,8 +1,10 @@
+const _ = require("lodash")
+
 const coHandler = require("./coHandler")
 const stopHandler = require("./stopHandler")
+const freqHandler = require("./freqHandler")
 
-
-const buildRoute = rt => (
+const buildRt = rt => (
   {
       co: coHandler.joinCompany(rt.co),
       route: rt.route,
@@ -11,15 +13,18 @@ const buildRoute = rt => (
   }
 )
 
-const buildRouteDetails = (rt, selectedCo) => (
+const buildRtDetails = (rt, selectedCo) => (
   {
     co: coHandler.joinCompany(rt.co),
     route: rt.route,
     bound: rt.bound[selectedCo] === "I" ? "inbound" : rt.bound[selectedCo] === "O" ? "Outbound" : rt.bound[selectedCo],
     orig: rt.orig,
     dest: rt.dest,
-    stops: stopHandler.batchTranslate(rt.stops[selectedCo], rt.fares)
+    stops: stopHandler.batchTranslate(rt.stops[selectedCo], rt.fares),
+    freq: freqHandler.getFrequency(rt.freq)
   }
 )
 
-module.exports = {buildRoute, buildRouteDetails}
+const printRt = rt => console.log(_.find(Object.values(data.routeList), {route: rt}))
+
+module.exports = {buildRt, buildRtDetails, printRt}

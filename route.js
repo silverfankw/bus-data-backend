@@ -9,8 +9,8 @@ const init = app => {
     const {co} = req.query
 
     const rtList = _.isEmpty(co) ?
-      _.map(_.filter(Object.values(data.routeList), req.query), rtHandler.buildRoute):
-      _.map(_.filter(Object.values(data.routeList), {...req.query, co: co.split(",")}), rtHandler.buildRoute)
+      _.map(_.filter(Object.values(data.routeList), req.query), rtHandler.buildRt):
+      _.map(_.filter(Object.values(data.routeList), {...req.query, co: co.split(",")}), rtHandler.buildRt)
     
     res.json(rtList)
   })
@@ -30,7 +30,7 @@ const init = app => {
     const rtList = 
       _.map(
         _.filter(Object.values(data.routeList), query), 
-        rt => rtHandler.buildRouteDetails(rt, co))
+        rt => rtHandler.buildRtDetails(rt, co))
     
     res.json(rtList)
   })
