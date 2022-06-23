@@ -6,10 +6,10 @@ const freqHandler = require("./freqHandler")
 
 const buildRt = rt => (
   {
-      co: coHandler.joinCompany(rt.co),
-      route: rt.route,
-      orig: rt.orig,
-      dest: rt.dest
+    co: coHandler.joinCompany(rt.co),
+    route: rt.route,
+    orig: rt.orig,
+    dest: rt.dest
   }
 )
 
@@ -25,6 +25,6 @@ const buildRtDetails = (rt, selectedCo) => (
   }
 )
 
-const printRt = rt => console.log(_.find(Object.values(data.routeList), {route: rt}))
+const printRt = rt => console.log(_.find(Object.values(data.routeList), { route: rt }))
 
-module.exports = {buildRt, buildRtDetails, printRt}
+module.exports = { buildRt, buildRtDetails, printRt }
