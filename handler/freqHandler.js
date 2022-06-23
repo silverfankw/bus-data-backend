@@ -1,33 +1,32 @@
 const util = require("../util")
 
 const freqMap = {
-  "287": "Mon - Fri",
-  "288": "Sat",
-  "448": "Sun & Public Holiday",
-  "480": "Sat - Sun"
+  "287": "Monday - Friday",
+  "288": "Saturday",
+  "319": "",
+  "448": "Sunday & Public Holiday",
+  "480": "Saturday & Sunday"
 }
 
+const destructureFreqRange = freqRange => 
+  Object.entries(freqRange).map(freq => {
+    const [from, to, period] = freq.flat()
+
+    if (util.isNull(to)) {
+      const staticDeparture = util.strToTime(from)
+      return ({from: staticDeparture, to: staticDeparture, period})
+    }
+    else {
+      return {from: util.strToTime(from), to: util.strToTime(to), period: util.secToMin(period)}
+    } 
+  })
+
+
 const getFrequency = freqGrp => 
-
-  Object.entries(freqGrp).map(freqMap => {
-    const dayType = freqMap[0]
-    const freq = freqMap[1]
-    console.log(freqMap)
-    Object.entries(freq).map(freq => {
-      freq = freq.flat()
-      // console.log(freq)
-      from = freq[0]
-      to = freq[1]
-      period = freq[2] ?? "fixed"
-
-      if (util.isNull(to)) {
-        const staticDeparture = util.strToTime(from)
-        return {dayType, from: staticDeparture, to: staticDeparture, period}
-      }
-      else {
-        return {dayType, from: util.strToTime(from), to: util.strToTime(to), period: util.secToMin(period)}
-      } 
-   })
+  Object.entries(freqGrp).map(freqData => {
+    const dayType = freqMap[freqData[0]]
+    const dayOfWeekFreq = freqData[1]
+    return {day_type: dayType, range: destructureFreqRange(dayOfWeekFreq)}
   })
 
 module.exports = {getFrequency}
