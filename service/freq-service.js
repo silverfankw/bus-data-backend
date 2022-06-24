@@ -1,11 +1,14 @@
 const {isNull, strToTime, secToMin} = require("../util")
 
 const freqMap = {
+  "31": "Monday - Friday (NLB 11)",
   "287": "Monday - Friday",
   "288": "Saturday",
-  "319": "",
+  "319": "Monday - Saturday",
+  "320": "Sunday & Public Holiday",
   "448": "Sunday & Public Holiday",
-  "480": "Saturday & Sunday"
+  "480": "Saturday & Sunday",
+  "511": "Everyday",
 }
 
 const destructureFreqRange = freqRange => 

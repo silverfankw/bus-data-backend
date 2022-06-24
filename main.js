@@ -16,6 +16,6 @@ setup().then(data => {
     console.log(`Server running at port ${PORT}...`)
     global.data = data
     
-    rtSvc.consoleLogRt("235")
+    // rtSvc.consoleLogRt("235")
   })
 })
