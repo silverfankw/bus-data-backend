@@ -1,6 +1,5 @@
 const _ = require("lodash")
 
-// const { companyService: coSvc, stopService: stopSvc, freqService: freqSvc } = require("./service-group")
 const { companyService: coSvc } = require("./co-service") 
 const { stopService: stopSvc } = require("./stop-service")
 const { freqService: freqSvc } = require("./freq-service")
