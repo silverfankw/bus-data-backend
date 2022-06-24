@@ -1,4 +1,4 @@
-const util = require("../util")
+const {isNull, strToTime, secToMin} = require("../util")
 
 const freqMap = {
   "287": "Monday - Friday",
@@ -10,14 +10,14 @@ const freqMap = {
 
 const destructureFreqRange = freqRange => 
   Object.entries(freqRange).map(freq => {
-    const [from, to, period] = freq.flat()
+    const [from, to, period = "Fixed Departure"] = freq.flat()
 
-    if (util.isNull(to)) {
-      const staticDeparture = util.strToTime(from)
+    if (isNull(to)) {
+      const staticDeparture = strToTime(from)
       return ({from: staticDeparture, to: staticDeparture, period})
     }
     else {
-      return {from: util.strToTime(from), to: util.strToTime(to), period: util.secToMin(period)}
+      return {from: strToTime(from), to: strToTime(to), period: secToMin(period)}
     } 
   })
 
