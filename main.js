@@ -8,9 +8,7 @@ const { initAllHandler } = require("./handler/handler-group")
 
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
-const setup = async () => {
-  return fetch(RAW_DATA_SOURCE).then(resp => resp.json())
-}
+const setup = async () => fetch(RAW_DATA_SOURCE).then(resp => resp.json())
 
 setup().then(data => {
   app.listen(PORT,  () => {
@@ -18,6 +16,6 @@ setup().then(data => {
     console.log(`Server running at port ${PORT}...`)
     global.data = data
     
-    // rtSvc.consoleLogRt("A31")
+    // rtSvc.consoleLogRt("48P")
   })
 })

@@ -1,8 +1,8 @@
 const _ = require("lodash")
 
-const { companyService: coSvc } = require("./co-service") 
-const { stopService: stopSvc } = require("./stop-service")
-const { freqService: freqSvc } = require("./freq-service")
+const { stringifyCompany } = require("./co-service") 
+const { batchTranslateStop } = require("./stop-service")
+const { getFrequency } = require("./freq-service")
 
 // Build route object only for basic information
 const buildRt = rt => (
@@ -19,13 +19,13 @@ const buildRtDetails = (rt, selectedCo) => {
   if (selectedCo == "lwb") selectedCo = "kmb"
   return (
     {
-      co: coSvc.stringifyCompany(rt.route, rt.co),
+      co: stringifyCompany(rt.route, rt.co),
       route: rt.route,
       bound: rt.bound[selectedCo] === "I" ? "inbound" : rt.bound[selectedCo] === "O" ? "Outbound" : rt.bound[selectedCo],
       orig: rt.orig,
       dest: rt.dest,
-      stops: stopSvc.batchTranslateStop(rt.stops[selectedCo], rt.fares),
-      freq: freqSvc.getFrequency(rt.freq)
+      stops: batchTranslateStop(rt.stops[selectedCo], rt.fares),
+      freq: getFrequency(rt.freq)
     }
   )
 }
