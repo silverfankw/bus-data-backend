@@ -2,10 +2,10 @@ const _ = require("lodash")
 const { routeService: rtSvc } = require("../service/service-group")
 const { error } = require("./error-handler")
 
-const init = app => {
+const init = router => {
 
   // Route List
-  app.get("/routes", (req, res) => {
+  router.get("/routes", (req, res) => {
     const { co } = req.query
 
     const rtList = _.isEmpty(co) ?
@@ -17,7 +17,7 @@ const init = app => {
 
 
   // Route Details
-  app.get("/routes/details", (req, res) => {
+  router.get("/routes/details", (req, res) => {
 
     if (_.isEmpty(req.query)) 
       return error(res, 400, "co & route parameters are required.")

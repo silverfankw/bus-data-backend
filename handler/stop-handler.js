@@ -1,7 +1,9 @@
-const init = app => {
+const _ = require("lodash")
+
+const init = router => {
   
   // Stop List
-  app.get("/stops", (req, res) => {
+  router.get("/stops", (req, res) => {
     const { name } = req.query
 
     const stopList = _.isEmpty(name) ? Object.values(data.stopList) :

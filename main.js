@@ -1,5 +1,5 @@
 const express = require('express')
-const app = express()
+const router = express()
 const LZUTF8 = require('lzutf8')
 
 const { PORT, RAW_DATA_SOURCE } = require('./config')
@@ -11,8 +11,8 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 const setup = async () => fetch(RAW_DATA_SOURCE).then(resp => resp.json())
 
 setup().then(data => {
-  app.listen(PORT,  () => {
-    initAllHandler(app)
+  router.listen(PORT,  () => {
+    initAllHandler(router)
     console.log(`Server running at port ${PORT}...`)
     global.data = data
     

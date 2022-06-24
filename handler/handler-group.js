@@ -2,9 +2,9 @@ const routeHandler = require("./route-handler")
 const stopHandler = require("./stop-handler")
 const errorHandler = require("./error-handler")
 
-const initAllHandler = app => {
-  routeHandler.init(app)
-  stopHandler.init(app)
+const initAllHandler = router => {
+  routeHandler.init(router)
+  stopHandler.init(router)
   console.log("Endpoints Initialized.")
 }
 
