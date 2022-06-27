@@ -17,7 +17,7 @@ const destructureFreqRange = freqRange =>
 
     if (isNull(to)) {
       const staticDeparture = strToTime(from)
-      return ({from: staticDeparture, to: staticDeparture, period})
+      return ({from: staticDeparture, period})
     }
     else {
       return {from: strToTime(from), to: strToTime(to), period: secToMin(period)}
