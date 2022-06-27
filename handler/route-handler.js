@@ -1,5 +1,6 @@
 const _ = require("lodash")
-const { routeService: rtSvc } = require("../service/service-group")
+const { buildRt, buildRtDetails } = require("../service/route-service")
+const { verifyAccess } = require("../service/acc-service")
 const { error } = require("./error-handler")
 
 const init = router => {
@@ -10,25 +11,29 @@ const init = router => {
 
     const rtList = _.isEmpty(co) ?
       _.map(_.filter(Object.values(data.routeList), req.query), buildRt) :
-      _.map(_.filter(Object.values(data.routeList), { ...req.query, co: co.split(",") }), rtSvc.buildRt)
+      _.map(_.filter(Object.values(data.routeList), { ...req.query, co: co.split(",") }), buildRt)
 
     res.json(rtList)
   })
 
 
   // Route Details
-  router.get("/routes/details", (req, res) => {
+  router.get("/routes/details", async (req, res) => {
 
-    if (_.isEmpty(req.query)) 
-      return error(res, 400, "co & route parameters are required.")
-  
-    const { co, route, bound = 'O' } = req.query
+    if (_.isEmpty(req.query)) return error(res, 400, "Request Params missing co / route parameters.")
+    if (_.isEmpty(req.body)) return error(res, 400, "Request body missing credential.")
+
+    const { co, route, bound = 'O'} = req.query
+    const { username, token } = req.body
+
+    if (!await verifyAccess(username, token)) return error(res, 401, "Token expires. Please log in again.")
+
     const query = { co: co.trim().split(","), route: route.trim().toUpperCase(), bound: { [co]: bound } }
 
     const rtList =
       _.map(
         _.filter(Object.values(data.routeList), query),
-        rt => rtSvc.buildRtDetails(rt, co))
+        rt => buildRtDetails(rt, co))
 
     res.json(rtList)
   })

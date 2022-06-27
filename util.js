@@ -11,4 +11,7 @@ const secToMin = sec => `${String(sec / 60)}`
 
 const capitalizeFirst = str => str.replace(regex.capitalizeFirst, ch => ch.toLowerCase())
 
-module.exports = {isNull, strToTime, secToMin, capitalizeFirst}
+const currentDateTime = () => new Date().toLocaleString("zh-hk", 
+      {year: "numeric", month: "2-digit", day: "2-digit", hour: '2-digit', minute: "2-digit", second: "numeric"})
+
+module.exports = {isNull, strToTime, secToMin, capitalizeFirst, currentDateTime}
