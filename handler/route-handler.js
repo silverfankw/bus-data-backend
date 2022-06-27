@@ -21,7 +21,6 @@ const init = router => {
   router.get("/routes/details", async (req, res) => {
 
     if (_.isEmpty(req.query)) return error(res, 400, "Request Params missing co / route parameters.")
-    if (_.isEmpty(req.body)) return error(res, 400, "Request body missing token.")
 
     const { co, route, bound = 'O'} = req.query
     const { token } = req.body
