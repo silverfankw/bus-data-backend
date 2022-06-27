@@ -1,7 +1,7 @@
 const _ = require("lodash")
 const { buildRt, buildRtDetails } = require("../service/route-service")
 const { verifyAccess } = require("../service/acc-service")
-const { error } = require("./error-handler")
+const { error, errorWithLog } = require("./error-handler")
 
 const init = router => {
 
@@ -21,12 +21,12 @@ const init = router => {
   router.get("/routes/details", async (req, res) => {
 
     if (_.isEmpty(req.query)) return error(res, 400, "Request Params missing co / route parameters.")
-    if (_.isEmpty(req.body)) return error(res, 400, "Request body missing credential.")
+    if (_.isEmpty(req.body)) return error(res, 400, "Request body missing token.")
 
     const { co, route, bound = 'O'} = req.query
-    const { username, token } = req.body
+    const { token } = req.body
 
-    if (!await verifyAccess(username, token)) return error(res, 401, "Token expires. Please log in again.")
+    if (!await verifyAccess(token)) return errorWithLog(res, 401, "Token expires. Please log in again.")
 
     const query = { co: co.trim().split(","), route: route.trim().toUpperCase(), bound: { [co]: bound } }
 

@@ -26,7 +26,7 @@ const init = router => {
       res.status(201).json({message: `User *${username}* create successful.`, token})
     }
     catch (err) {
-      errorWithLog(res, 500, `Internal server error: ${err}`)
+      return errorWithLog(res, 500, `Internal server error: ${err}`)
     }
   }) 
   
@@ -49,7 +49,7 @@ const init = router => {
         res.status(200).json({token})
       }
       catch (err) {
-        errorWithLog(res, 500, `Internal server error: ${err}`)
+        return errorWithLog(res, 500, `Internal server error: ${err}`)
       }
   })
 }

@@ -11,9 +11,9 @@ const error = (res, statusCode, msg = "Error occurs.") =>
     }).end() 
 
 const errorWithLog = (res, statusCode, msg = "Error occurs.") => {
-    error(res, statusCode, msg)
     console.log(msg)
     console.trace()
+    error(res, statusCode, msg)
 }
 
 module.exports = {error, errorWithLog}
