@@ -22,6 +22,7 @@ const buildRtDetails = (rt, selectedCo) => {
     {
       co: stringifyCompany(rt.route, rt.co),
       route: rt.route,
+      service_type: rt.serviceType,
       bound: rt.bound[selectedCo] === "I" ? "Inbound" : rt.bound[selectedCo] === "O" ? "Outbound" : rt.bound[selectedCo],
       orig: {...rt.orig, en: toSentenceCase(rt.orig.en)},
       dest: {...rt.dest, en: toSentenceCase(rt.dest.en)},
