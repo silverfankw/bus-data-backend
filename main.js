@@ -2,7 +2,6 @@ const express = require('express')
 const router = express().use(express.json())
 
 const { PORT, RAW_DATA_SOURCE, connectMongo } = require('./config')
-const { routeService: rtSvc } = require('./service/service-group')
 const { initAllHandler } = require("./handler/handler-group")
 
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
@@ -16,7 +15,6 @@ setup().then(data => {
       initAllHandler(router)
       console.log(`Server running at port ${PORT}...`)
       global.data = data
-      // rtSvc.consoleLogRt("235")
     }
     catch (err) {
       console.log(err)
