@@ -1,4 +1,4 @@
-const coMap = { "kmb": "九巴", "ctb": "城巴", "nwfb": "新巴", "lwb": "龍運", "nlb": "新巴", "gmb": "綠色小巴"}
+// const coMap = { "kmb": "九巴", "ctb": "城巴", "nwfb": "新巴", "lwb": "龍運", "nlb": "新巴", "gmb": "綠色小巴"}
 
 const isLwbRoutes = targetRt =>  [
     'A31', 'A32', 'A33', 'A33X', 'A34', 'A36', 'A37', 'A41', 'A41P', 'A43', 'A43P', 'A47X',
@@ -11,6 +11,6 @@ const isLwbRoutes = targetRt =>  [
     'X1', 'X33', 'X36', 'X40', 'X43', 'X47'
 ].some(lwbRt => lwbRt === targetRt)
 
-const stringifyCompany = (rt, co) => co.map(c => (isLwbRoutes(rt) && c === 'kmb') ? coMap[`lwb`]: coMap[c]).join(', ')
+const stringifyCompany = (rt, co) => co.map(c => (isLwbRoutes(rt) && c === 'kmb') ? `lwb`: c).join(',')
 
 module.exports = { stringifyCompany }

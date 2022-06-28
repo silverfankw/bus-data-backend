@@ -3,7 +3,6 @@ const _ = require("lodash")
 const { getFareByIndex } = require("./fare-service")
 const { toSentenceCase } = require("../util")
 
-
 // Get bus stop order by index + 1 (since index starts from 0)
 const getStopOrder = idx => ({stop_no: idx + 1})
 
