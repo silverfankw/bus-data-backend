@@ -1,6 +1,3 @@
-const { verifyAccess } = require("../service/acc-service")
-const { error, errorWithLog } = require("./error-handler")
-
 const routeHandler = require("./route-handler")
 const stopHandler = require("./stop-handler")
 const errorHandler = require("./error-handler")

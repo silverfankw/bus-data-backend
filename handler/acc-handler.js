@@ -16,13 +16,20 @@ const init = router => {
 
       if (await getUser({email})) return error(res, 409, "User Already Exist.")
  
-      const user = await createUser(username, email.toLowerCase(), password);
       const token = jwt.sign(
         { user_id: user._id, email },
         process.env.TOKEN_KEY,
-        { expiresIn: "5m" }
+        { expiresIn: "1h" }
       );
-  
+
+      const user = await createUser({
+        username,
+        email: email.toLowerCase(),
+        password: await bcrypt.hash(password, 10),
+        token,
+        register_at: Date.now(),
+      });
+
       res.status(201).json({message: `User *${username}* create successful.`, token})
     }
     catch (err) {
@@ -43,7 +50,7 @@ const init = router => {
         const token = jwt.sign(
             { user_id: user._id, email}, 
             process.env.TOKEN_KEY,
-            { expiresIn: "5m" })
+            { expiresIn: "1h" })
 
         await Account.updateOne({email}, {last_login_at: Date.now(), token})
         res.status(200).json({token})

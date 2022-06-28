@@ -15,13 +15,8 @@ const destructureFreqRange = freqRange =>
   Object.entries(freqRange).map(freq => {
     const [from, to, period = "Fixed Departure"] = freq.flat()
 
-    if (isNull(to)) {
-      const staticDeparture = strToTime(from)
-      return ({from: staticDeparture, period})
-    }
-    else {
-      return {from: strToTime(from), to: strToTime(to), period: secToMin(period)}
-    } 
+    if (isNull(to)) return ({from: strToTime(from), period})
+    else return {from: strToTime(from), to: strToTime(to), period: secToMin(period)}
   })
 
 
