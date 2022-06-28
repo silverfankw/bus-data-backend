@@ -8,6 +8,9 @@ const { toSentenceCase, isNull } = require("../util")
 
 // Get full list of bus routes
 const getRouteList = (co, rts) => {
+  // Handle exception when co is undefined
+  co === undefined ? co : co.toLowerCase()
+
   const filterRoute = arr => arr.filter(rt => stringifyCompany(rt.route, rt.co).includes(co))
   const mapRoute = prevArr => prevArr.map(rt => ({
     co: stringifyCompany(rt.route, rt.co), 

@@ -8,7 +8,7 @@ const init = router => {
   // Route List
   router.get("/routes", (req, res) => {
     const { co } = req.query
-    res.json(getRouteList(co.toLowerCase(), routeList))
+    res.json(getRouteList(co, routeList))
   })
 
 
@@ -18,7 +18,7 @@ const init = router => {
     if (_.isEmpty(req.query)) return error(res, 400, "Request Params missing co / route parameters.")
 
     const { co, route, bound = 'O'} = req.query
-    const { token } = req.body
+    const token = req.get("X-jwt-token")
 
     if (!await verifyAccess(token)) return errorWithLog(res, 401, "Token expires. Please log in again.")
 
