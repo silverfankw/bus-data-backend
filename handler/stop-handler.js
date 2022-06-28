@@ -6,10 +6,10 @@ const init = router => {
   router.get("/stops", (req, res) => {
     const { name } = req.query
 
-    const stopList = _.isEmpty(name) ? Object.values(data.stopList) :
-      _.filter(Object.values(data.stopList), stop => stop.name.zh.match(`${name}`) || stop.name.en.match(`${name}`))
+    const stops = _.isEmpty(name) ? Object.values(stopList) :
+      _.filter(Object.values(stopList), stop => stop.name.zh.match(`${name}`) || stop.name.en.match(`${name}`))
 
-    res.json(stopList)
+    res.json(stops)
   })
 }
 

@@ -11,6 +11,8 @@ const isLwbRoutes = targetRt =>  [
     'X1', 'X33', 'X36', 'X40', 'X43', 'X47'
 ].some(lwbRt => lwbRt === targetRt)
 
+// const getCompanyList = co => 
+
 const stringifyCompany = (rt, co) => co.map(c => (isLwbRoutes(rt) && c === 'kmb') ? `lwb`: c).join(',')
 
 module.exports = { stringifyCompany }

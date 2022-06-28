@@ -8,7 +8,7 @@ const init = router => {
   // Route List
   router.get("/routes", (req, res) => {
     const { co } = req.query
-    res.json(getRouteList(co.toLowerCase(), Object.values(data.routeList)))
+    res.json(getRouteList(co.toLowerCase(), routeList))
   })
 
 
@@ -22,13 +22,9 @@ const init = router => {
 
     if (!await verifyAccess(token)) return errorWithLog(res, 401, "Token expires. Please log in again.")
 
-    const query = { co: co.trim().split(",").toLowerCase(), route: route.trim().toUpperCase(), bound: { [co]: bound } }
+    const query = { co: co.trim().toLowerCase().split(","), route: route.trim().toUpperCase(), bound: { [co]: bound } }
 
-    const rtList =
-      _.map(
-        _.filter(Object.values(data.routeList), query),
-        rt => buildRtDetails(rt, co))
-
+    const rtList = _.filter(routeList, query).map(rt => buildRtDetails(rt, co))
     res.json(rtList)
   })
 }

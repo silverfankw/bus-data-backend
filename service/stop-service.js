@@ -13,7 +13,7 @@ const batchTranslateStop = (stopIDs, fares) =>
 
 
 // Lookup bus stop name by stopID in the stopList
-const translateStop = stopID => _.pick(data.stopList[stopID], "name")
+const translateStop = stopID => _.pick(stopList[stopID], "name")
 
 
 const stopToSentenceCase = stop => ({...stop, name: {...stop.name, en: toSentenceCase(stop.name.en)}})
