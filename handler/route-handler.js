@@ -25,7 +25,8 @@ const init = router => {
     const query = { co: co.trim().toLowerCase().split(","), route: route.trim().toUpperCase(), bound: { [co]: bound } }
 
     const rtList = _.filter(routeList, query).map(rt => buildRtDetails(rt, co))
-    res.json(rtList)
+    if (rtList.length) res.json(rtList)
+    else return errorWithLog(res, 404, "Route not found.")
   })
 }
 

@@ -6,6 +6,12 @@ const coHandler = require("./co-handler")
 
 
 const initAllHandler = router => {
+  router.use((req, res, next) => {
+    res.header({"Access-Control-Allow-Origin": "http://localhost:3000"})
+    res.header({"Access-Control-Allow-Headers": "Content-Type"})
+    next()
+  })
+
   coHandler.init(router)
   routeHandler.init(router)
   stopHandler.init(router)
