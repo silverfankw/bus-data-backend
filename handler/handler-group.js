@@ -8,7 +8,7 @@ const coHandler = require("./co-handler")
 const initAllHandler = router => {
   router.use((req, res, next) => {
     res.header({"Access-Control-Allow-Origin": "http://localhost:3000"})
-    res.header({"Access-Control-Allow-Headers": "Content-Type"})
+    res.header({"Access-Control-Allow-Headers": ["x-jwt-token", "Content-Type"]})
     next()
   })
 
