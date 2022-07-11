@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs/dist/bcrypt");
 const jwt = require("jsonwebtoken");
-const Account = require("../model/account");
+const Account = require("../model/Account");
 const util = require('util');
 
 const jwtVerifyAsync = util.promisify(jwt.verify);
