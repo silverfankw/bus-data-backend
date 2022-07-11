@@ -1,3 +1,3 @@
-const getFareByIndex = (index, fares) => ({fare: fares[index]})
+const getFareByIndex = (index, fares) => fares === null ? ({fare: null}) : ({fare: fares[index]})
 
 module.exports = {getFareByIndex}

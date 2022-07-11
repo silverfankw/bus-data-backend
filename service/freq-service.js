@@ -21,6 +21,7 @@ const destructureFreqRange = freqRange =>
 
 
 const getFrequency = freqGrp => 
+  isNull (freqGrp) ? {} :
   Object.entries(freqGrp).map(freqData => {
     const dayType = freqMap[freqData[0]]
     const dayOfWeekFreq = freqData[1]
