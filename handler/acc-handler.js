@@ -2,7 +2,7 @@ const _ = require('lodash');
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs/dist/bcrypt");
 
-const Account = require("../model/account");
+const Account = require("../model/Account");
 const { createUser, getUser } = require("../service/acc-service")
 const { error, errorWithLog } = require("./error-handler")
 
