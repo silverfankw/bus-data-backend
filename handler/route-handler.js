@@ -18,9 +18,8 @@ const init = router => {
     if (_.isEmpty(req.query)) return error(res, 400, "Request Params missing co / route parameters.")
 
     const { co, route, bound = 'O'} = req.query
-    const token = req.get("X-jwt-token")
-
-    if (!await verifyAccess(token)) return errorWithLog(res, 401, "Token expires. Please log in again.")
+    // const token = req.get("X-jwt-token")
+    // if (!await verifyAccess(token)) return errorWithLog(res, 401, "Token expires. Please log in again.")
 
     const query = { co: co.trim().toLowerCase().split(","), route: route.trim().toUpperCase(), bound: { [co]: bound } }
 

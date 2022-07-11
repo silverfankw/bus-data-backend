@@ -15,7 +15,7 @@ setup().then(data => {
       global.stopList = data.stopList
       // global.coList = _.uniqWith(Object.values(data.routeList).map(rt => rt.co), _.isEqual)
       
-      connectMongo()
+      // connectMongo()
       initAllHandler(router)
       console.log(`Server running at port ${PORT}...`)
     }
