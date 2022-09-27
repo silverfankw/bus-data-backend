@@ -40,6 +40,8 @@ const buildRtDetails = (rt, selectedCo) => {
   return (
     {
       co: stringifyCompany(rt.route, rt.co),
+      // bg_color: ,
+      // text_color: ,
       route: rt.route,
       service_type: rt.serviceType,
       bound: rt.bound[selectedCo] === "I" ? "Inbound" : rt.bound[selectedCo] === "O" ? "Outbound" : rt.bound[selectedCo],
