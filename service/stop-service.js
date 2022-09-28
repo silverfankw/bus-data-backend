@@ -11,7 +11,6 @@ const getStopOrder = idx => ({stop_no: idx + 1})
 const batchTranslateStop = (stopIDs, fares) => 
   stopIDs.map((stopID, i) => stopToSentenceCase(_.extend(translateStop(stopID), getFareByIndex(i, fares), getStopOrder(i))))
 
-
 // Lookup bus stop name by stopID in the stopList
 const translateStop = stopID => _.pick(stopList[stopID], "name")
 

@@ -13,10 +13,10 @@ const freqMap = {
 
 const destructureFreqRange = freqRange => 
   Object.entries(freqRange).map(freq => {
-    const [from, to, period = "Fixed Departure"] = freq.flat()
+    const [from, to, interval = "Fixed Departure"] = freq.flat()
 
-    if (isNull(to)) return {time_range: `${strToTime(from)}`, period}
-    else return {time_range: `${strToTime(from)} - ${strToTime(to)}`, period: `${secToMin(period)} mins`}
+    if (isNull(to)) return {time_range: `${strToTime(from)}`, interval}
+    else return {time_range: `${strToTime(from)} - ${strToTime(to)}`, interval: `${secToMin(interval)} mins`}
   })
 
 

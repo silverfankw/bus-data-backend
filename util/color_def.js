@@ -1,20 +1,25 @@
-export const RED = "#FF1212"
+const RED = "#FF1212"
 
-export const ORANGE = "#FFA412"
+const DARK_RED = "#C40424"
 
-export const ORANGE_YELLOW = "#FFBB00"
+const ORANGE = "#FFA412"
 
-export const YELLOW = "#FFE400"
+const CANARY = "#FFBB00"
 
-export const GREEN = "#1C702C"
+const YELLOW = "#FFE400"
 
-export const LIGHT_BLUE = "#0BBDFF"
+const GREEN = "#1C702C"
 
-export const DARK_BLUE = "#0E175B"
+const LIGHT_BLUE = "#0BBDFF"
 
-export const PURPLE = "#980BFF"
+const DARK_BLUE = "#020847"
 
-export const BLACK = "#000000"
+const PURPLE = "#9F0FFF"
 
-export const WHITE = "#FFFFFF"
+const BLACK = "#000000"
 
+const WHITE = "#FFFFFF"
+
+const DEFAULT = ""
+
+module.exports = { RED, DARK_RED, ORANGE, CANARY, YELLOW, GREEN, LIGHT_BLUE, DARK_BLUE, PURPLE, BLACK, WHITE, DEFAULT }

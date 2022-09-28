@@ -1,6 +1,5 @@
 const _ = require("lodash")
 const { getRouteList, buildRtDetails } = require("../service/route-service")
-const { verifyAccess } = require("../service/acc-service")
 const { error, errorWithLog } = require("./error-handler")
 
 const init = router => {
@@ -11,21 +10,22 @@ const init = router => {
     res.json(getRouteList(co, routeList))
   })
 
-
   // Route Details
   router.get("/routes/details", async (req, res) => {
 
     if (_.isEmpty(req.query)) return error(res, 400, "Request Params missing co / route parameters.")
 
     const { co, route, bound } = req.query
-    
-    // const token = req.get("X-jwt-token")
-    // if (!await verifyAccess(token)) return errorWithLog(res, 401, "Token expires. Please log in again.")
 
-    const query = { co: co.trim().toLowerCase().split(","), route: route.trim().toUpperCase(), ...(bound && {bound: { [co]: bound }}) }
+    const query = { 
+      co: co.trim().toLowerCase().split(","), route: route.trim().toUpperCase(), 
+      ...(bound && {bound: { [co]: bound.toUpperCase() }}) }
 
     const rtList = _.filter(routeList, query).map(rt => buildRtDetails(rt, co))
-    if (rtList.length) res.json(rtList)
+    if (rtList.length) {
+      console.log(`${req.ip} request -> Result found: ${rtList[0].co.en} - ${rtList[0].route}`)
+      res.json(rtList) 
+    }
     else return errorWithLog(res, 404, "Route not found.")
   })
 }

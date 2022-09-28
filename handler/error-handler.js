@@ -12,10 +12,8 @@ const error = (res, statusCode, msg = "Error occurs.") =>
 
 const errorWithLog = (res, statusCode, msg = "Error occurs.") => {
     console.log(msg)
-    console.trace()
+    // console.trace()
     error(res, statusCode, msg)
 }
 
 module.exports = {error, errorWithLog}
-
-// new Date().toISOString().replace('T', ' ').substr(0, 19)

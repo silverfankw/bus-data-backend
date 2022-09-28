@@ -13,7 +13,6 @@ setup().then(data => {
     try {
       global.routeList = Object.values(data.routeList)
       global.stopList = data.stopList
-      // global.coList = _.uniqWith(Object.values(data.routeList).map(rt => rt.co), _.isEqual)
       
       // connectMongo()
       initAllHandler(router)
