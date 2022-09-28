@@ -9,6 +9,7 @@ const setup = async () => fetch(RAW_DATA_SOURCE).then(resp => resp.json())
 
 
 setup().then(data => {
+  connectMongo()
   router.listen(PORT,  () => {
     try {
       global.routeList = Object.values(data.routeList)

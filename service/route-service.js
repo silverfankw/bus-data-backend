@@ -110,4 +110,4 @@ const getRouteTextColor = (rt, co) => {
 const consoleLogRt = rt => console.log(_.find(Object.values(data.routeList), { route: rt }))
 
 
-module.exports = { getRouteList, buildRt, buildRtDetails, consoleLogRt }
+module.exports = { getRouteList, buildRt, buildRtDetails, consoleLogRt, getRouteBgColor, getRouteTextColor}
