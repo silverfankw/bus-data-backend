@@ -1,4 +1,4 @@
-const {isNull, strToTime, secToMin} = require("../util")
+const {isNull, strToTime, secToMin} = require("../util/common")
 
 const freqMap = {
   "31": "Monday - Friday (NLB 11)",

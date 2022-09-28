@@ -3,7 +3,7 @@ const _ = require("lodash")
 const { stringifyCompany } = require("./co-service") 
 const { batchTranslateStop } = require("./stop-service")
 const { getFrequency } = require("./freq-service")
-const { toSentenceCase, isNull } = require("../util")
+const { toSentenceCase, isNull } = require("../util/common")
 
 const color = require("../util/color_def")
 const routeDef = require("../util/route_def")

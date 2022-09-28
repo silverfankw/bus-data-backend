@@ -1,4 +1,4 @@
-const { currentDateTime } = require("../util")
+const { currentDateTime } = require("../util/common")
 
 /*  error(...) defines the response code and response message
     res: response */
