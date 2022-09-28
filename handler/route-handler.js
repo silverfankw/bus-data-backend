@@ -23,7 +23,7 @@ const init = router => {
 
     const rtList = _.filter(routeList, query).map(rt => buildRtDetails(rt, co))
     if (rtList.length) {
-      console.log(`${req.ip} request -> Result found: ${rtList[0].co.en} - ${rtList[0].route}`)
+      // console.log(`${req.ip} request -> Result found: ${rtList[0].co.en} - ${rtList[0].route}`)
       res.json(rtList) 
     }
     else return errorWithLog(res, 404, "Route not found.")

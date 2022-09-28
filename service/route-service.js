@@ -69,6 +69,9 @@ const getRouteBgColor = (rt, co) => {
     case "nwfb":
       if (routeDef.IS_REGULAR_ROUTE(rt))
         return color.PURPLE
+    case "nlb":
+      if (routeDef.IS_REGULAR_ROUTE(rt))
+        return color.EGYPTIAN_BLUE
     default:
       if (routeDef.IS_RED_BG(rt))
         return color.RED
@@ -79,7 +82,7 @@ const getRouteBgColor = (rt, co) => {
       if (routeDef.IS_OVERNIGHT_ROUTE(rt)) 
         return color.BLACK
       if (routeDef.IS_LWB_AIRPORT_ROUTE(rt))
-        return color.DARK_BLUE
+        return color.ROYAL_BLUE
       if (routeDef.IS_LWB_EXTERNAL_ROUTE(rt) || routeDef.IS_LWB_S_ROUTE(rt) || routeDef.IS_LWB_EVENT_ROUTE(rt))
         return color.ORANGE
       else
