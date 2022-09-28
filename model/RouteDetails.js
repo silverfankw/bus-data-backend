@@ -9,8 +9,8 @@ const RouteDetails = mongoose.model("RouteDetails", {
   bound: String,
   orig: {en: String, zh: String},
   dest: {en: String, zh: String},
-  stops: {name: {en: String, zh: String}, fare: String, stop_no: Number},
-  freq: {day_type: String, detail: {time_range: String, interval: String}}
+  stops: [{name: {en: String, zh: String}, fare: String, stop_no: Number}],
+  freq: [{day_type: String, detail: {time_range: String, interval: String}}]
 })
 
 module.exports = { RouteDetails }

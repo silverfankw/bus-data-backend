@@ -11,8 +11,7 @@ const { toSentenceCase, isNull } = require("../util/common")
 
 const constructRouteData = async () => {
 
-  const insert_result = await RouteDetails.insertMany(routeList.map(rt => {
-    return {
+  const insert_result = await RouteDetails.insertMany(routeList.map(rt => ({
     co: stringifyCompany(rt.route, rt.co),
     bg_color: getRouteBgColor(rt.route, rt.co),
     text_color: getRouteTextColor(rt.route, rt.co),
@@ -23,7 +22,7 @@ const constructRouteData = async () => {
     dest: {...rt.dest, en: toSentenceCase(rt.dest.en)},
     stops: batchTranslateStop(rt.stops[rt.co[0]] ?? rt.stops[rt.co[1]], rt.fares),
     freq: getFrequency(rt.freq)
-  }}), (err, data) => console.log(err))
+  })), (err, data) => console.log(err))
 
   return insert_result
 }

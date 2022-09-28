@@ -3,7 +3,7 @@ const mongoService = require("../service/mongo-service")
 
 const init = router => {
   router.post("/mongo/load-data", (req, res, next) => {
-    if (mongoService.constructRouteData())
+    if (mongoService.constructRouteData() == null)
       res.status(201)
     else
       res.status(500)
