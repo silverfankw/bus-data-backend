@@ -1,4 +1,6 @@
 const { currentDateTime } = require("../util/common")
+const { printError } = require("../util/logger")
+
 
 /*  error(...) defines the response code and response message
     res: response */
@@ -11,7 +13,7 @@ const error = (res, statusCode, msg = "Error occurs.") =>
     }).end() 
 
 const errorWithLog = (res, statusCode, msg = "Error occurs.") => {
-    console.log(msg)
+    printError(msg)
     // console.trace()
     error(res, statusCode, msg)
 }

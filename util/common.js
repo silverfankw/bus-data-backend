@@ -1,3 +1,6 @@
+// const {format} = require("date-fns")
+const { utcToZonedTime, format } = require('date-fns-tz')
+
 const regex = {
   sentenceCase: /\B[A-Z]|('S)/g,
   isFourDigit: /(\d{2})(\d{2})/,
@@ -16,7 +19,7 @@ const secToMin = sec => `${String(sec / 60)}`
 
 const toSentenceCase = str => str.replace(regex.sentenceCase, ch => ch.toLowerCase())
 
-const currentDateTime = () => new Date().toLocaleString("zh-hk", 
-      {year: "numeric", month: "2-digit", day: "2-digit", hour: '2-digit', minute: "2-digit", second: "numeric"})
+const currentDateTime = () => format(utcToZonedTime(new Date(), "Asia/Hong_Kong"), "yyyy/MM/dd H:mm:ss")
 
 module.exports = {isNull, strToTime, secToMin, toSentenceCase, currentDateTime}
+

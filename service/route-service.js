@@ -1,9 +1,8 @@
-const _ = require("lodash")
-
 const { stringifyCompany } = require("./co-service") 
 const { batchTranslateStop } = require("./stop-service")
 const { getFrequency } = require("./freq-service")
 const { toSentenceCase, isNull } = require("../util/common")
+const { printRouteDetails } = require("../util/logger")
 
 const color = require("../util/color_def")
 const routeDef = require("../util/route_def")
@@ -40,7 +39,7 @@ const buildRt = rt => (
 // Build route object for detail information
 const buildRtDetails = (rt, selectedCo) => {
   if (selectedCo == "lwb") selectedCo = "kmb"
-  // console.log(rt)
+  // printRouteDetails(rt)
   return (
     {
       co: stringifyCompany(rt.route, rt.co),
@@ -61,32 +60,23 @@ const getRouteBgColor = (rt, co) => {
   // Get only the first company
   switch(co[0]) {
     case "kmb":
-      if (routeDef.IS_REGULAR_ROUTE(rt))
-        return color.DEFAULT
+      if (routeDef.IS_REGULAR_ROUTE(rt)) return color.DEFAULT
     case "ctb":
-      if (routeDef.IS_REGULAR_ROUTE(rt))
-        return color.LIGHT_BLUE
+      if (routeDef.IS_REGULAR_ROUTE(rt)) return color.LIGHT_BLUE
     case "nwfb":
-      if (routeDef.IS_REGULAR_ROUTE(rt))
-        return color.PURPLE
+      if (routeDef.IS_REGULAR_ROUTE(rt)) return color.PURPLE
     case "nlb":
-      if (routeDef.IS_REGULAR_ROUTE(rt))
-        return color.EGYPTIAN_BLUE
+      if (routeDef.IS_REGULAR_ROUTE(rt)) return color.EGYPTIAN_BLUE
     default:
-      if (routeDef.IS_RED_BG(rt))
-        return color.RED
-      if (routeDef.IS_CITYFLYER_ROUTE(rt))
-        return color.DARK_RED
-      if (routeDef.IS_WHC_ROUTE(rt))
-        return color.GREEN
-      if (routeDef.IS_OVERNIGHT_ROUTE(rt)) 
-        return color.BLACK
-      if (routeDef.IS_LWB_AIRPORT_ROUTE(rt))
-        return color.ROYAL_BLUE
-      if (routeDef.IS_LWB_EXTERNAL_ROUTE(rt) || routeDef.IS_LWB_S_ROUTE(rt) || routeDef.IS_LWB_EVENT_ROUTE(rt))
+      if (routeDef.IS_RED_BG(rt)) return color.RED
+      if (routeDef.IS_CITYFLYER_ROUTE(rt)) return color.DARK_RED
+      if (routeDef.IS_WHC_ROUTE(rt)) return color.GREEN
+      if (routeDef.IS_OVERNIGHT_ROUTE(rt))  return color.BLACK
+      if (routeDef.IS_LWB_AIRPORT_ROUTE(rt)) return color.ROYAL_BLUE
+      if (routeDef.IS_LWB_EXTERNAL_ROUTE(rt) || routeDef.IS_LWB_S_ROUTE(rt)
+        || routeDef.IS_LWB_EVENT_ROUTE(rt)) 
         return color.ORANGE
-      else
-        return color.DEFAULT
+      else return color.DEFAULT
   }
 }
 
@@ -97,17 +87,12 @@ const getRouteTextColor = (rt, co) => {
     case "ctb":
     case "nwfb":
     default:
-      if (routeDef.IS_CTB_NWFB_OVERNIGHT_ROUTE(rt))
-        return color.CANARY
-      if (routeDef.IS_LWB_AIRPORT_ROUTE(rt) || routeDef.IS_LWB_AIRPORT_OVERNIGHT_ROUTE(rt) || routeDef.IS_NLB_OVERNIGHT_ROUTE(rt))
+      if (routeDef.IS_CTB_NWFB_OVERNIGHT_ROUTE(rt)) return color.CANARY
+      if (routeDef.IS_LWB_AIRPORT_ROUTE(rt) || routeDef.IS_LWB_AIRPORT_OVERNIGHT_ROUTE(rt)
+        || routeDef.IS_NLB_OVERNIGHT_ROUTE(rt)) 
         return color.YELLOW
-      else
-        return color.WHITE
+      else return color.WHITE
   }
 }
 
-// Console log raw data for route details 
-const consoleLogRt = rt => console.log(_.find(Object.values(data.routeList), { route: rt }))
-
-
-module.exports = { getRouteList, buildRt, buildRtDetails, consoleLogRt, getRouteBgColor, getRouteTextColor}
+module.exports = { getRouteList, buildRt, buildRtDetails, getRouteBgColor, getRouteTextColor}

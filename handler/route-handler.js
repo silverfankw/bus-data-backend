@@ -22,11 +22,11 @@ const init = router => {
       ...(bound && {bound: { [co]: bound.toUpperCase() }}) }
 
     const rtList = _.filter(routeList, query).map(rt => buildRtDetails(rt, co))
-    if (rtList.length) {
-      // console.log(`${req.ip} request -> Result found: ${rtList[0].co.en} - ${rtList[0].route}`)
+
+    if (rtList.length) 
       res.json(rtList) 
-    }
-    else return errorWithLog(res, 404, "Route not found.")
+    else 
+      return errorWithLog(res, 404, "Route not found.")
   })
 }
 
