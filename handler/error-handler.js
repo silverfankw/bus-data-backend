@@ -1,4 +1,6 @@
-const { currentDateTime } = require("../util")
+const { currentDateTime } = require("../util/common")
+const { printError } = require("../util/logger")
+
 
 /*  error(...) defines the response code and response message
     res: response */
@@ -11,11 +13,9 @@ const error = (res, statusCode, msg = "Error occurs.") =>
     }).end() 
 
 const errorWithLog = (res, statusCode, msg = "Error occurs.") => {
-    console.log(msg)
-    console.trace()
+    printError(msg)
+    // console.trace()
     error(res, statusCode, msg)
 }
 
 module.exports = {error, errorWithLog}
-
-// new Date().toISOString().replace('T', ' ').substr(0, 19)

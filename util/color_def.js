@@ -1,0 +1,27 @@
+const RED = "#FF1212"
+
+const DARK_RED = "#C40424"
+
+const ORANGE = "#FFA412"
+
+const CANARY = "#FFBB00"
+
+const YELLOW = "#FFE400"
+
+const GREEN = "#1C702C"
+
+const LIGHT_BLUE = "#0BBDFF"
+
+const EGYPTIAN_BLUE = "#1034A6"
+
+const ROYAL_BLUE = "#111E6C"
+
+const PURPLE = "#9F0FFF"
+
+const BLACK = "#000000"
+
+const WHITE = "#FFFFFF"
+
+const DEFAULT = ""
+
+module.exports = { RED, DARK_RED, ORANGE, CANARY, YELLOW, GREEN, LIGHT_BLUE, EGYPTIAN_BLUE, ROYAL_BLUE, PURPLE, BLACK, WHITE, DEFAULT }
