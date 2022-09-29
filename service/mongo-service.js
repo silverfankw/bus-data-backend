@@ -9,22 +9,32 @@ const { toSentenceCase, isNull } = require("../util/common")
 
 
 
-const constructRouteData = async () => {
+const constructRouteData = () => {
 
-  const insert_result = await RouteDetails.insertMany(routeList.map(rt => ({
-    co: stringifyCompany(rt.route, rt.co),
-    bg_color: getRouteBgColor(rt.route, rt.co),
-    text_color: getRouteTextColor(rt.route, rt.co),
-    route: rt.route,
-    service_type: rt.serviceType,
-    bound: rt.bound[rt.co[0]] ?? rt.bound[rt.co[1]],
-    orig: {...rt.orig, en: toSentenceCase(rt.orig.en)},
-    dest: {...rt.dest, en: toSentenceCase(rt.dest.en)},
-    stops: batchTranslateStop(rt.stops[rt.co[0]] ?? rt.stops[rt.co[1]], rt.fares),
-    freq: getFrequency(rt.freq)
-  })), (err, data) => console.log(err))
+  return new Promise(async (resolve, reject) => {
 
-  return insert_result
+    const dropSuccess = await RouteDetails.collection.drop()
+
+    if (!dropSuccess) 
+      reject({ok: false, message: "Failed to drop table."})
+  
+    RouteDetails.insertMany(routeList.map(rt => ({
+      co: stringifyCompany(rt.route, rt.co),
+      bg_color: getRouteBgColor(rt.route, rt.co),
+      text_color: getRouteTextColor(rt.route, rt.co),
+      route: rt.route,
+      service_type: rt.serviceType,
+      bound: rt.bound[rt.co[0]] ?? rt.bound[rt.co[1]],
+      orig: {...rt.orig, en: toSentenceCase(rt.orig.en)},
+      dest: {...rt.dest, en: toSentenceCase(rt.dest.en)},
+      stops: batchTranslateStop(rt.stops[rt.co[0]] ?? rt.stops[rt.co[1]], rt.fares),
+      freq: getFrequency(rt.freq)
+    })), (err, data) => {
+      if (err) reject({ok: false, message: "Failed to load data to mongo."})
+      else resolve({ok: true, message: "Data load successful."})
+    })
+  })
+
 }
 
 
