@@ -1,5 +1,6 @@
-// const {format} = require("date-fns")
 const { utcToZonedTime, format } = require('date-fns-tz')
+
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const regex = {
   sentenceCase: /\B[A-Z]|('S)/g,
@@ -21,5 +22,5 @@ const toSentenceCase = str => str.replace(regex.sentenceCase, ch => ch.toLowerCa
 
 const currentDateTime = () => format(utcToZonedTime(new Date(), "Asia/Hong_Kong"), "yyyy/MM/dd H:mm:ss")
 
-module.exports = {isNull, strToTime, secToMin, toSentenceCase, currentDateTime}
+module.exports = {fetch, isNull, strToTime, secToMin, toSentenceCase, currentDateTime}
 
