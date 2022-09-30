@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const {PORT, RAW_DATA_SOURCE} = process.env
+const {PORT, RAW_DATA_SOURCE, SPECIAL_SERVICE_SOURCE} = process.env
 const express = require('express')
 const router = express().use(express.json())
 
@@ -10,24 +10,23 @@ const { printInfo, printError } = require("./util/logger")
 const { initMiddlewares } = require("./handler/middleware-handler")
 const { startCronjob } = require("./service/cron-service")
 
-const fetchSource = async () => fetch(RAW_DATA_SOURCE).then(resp => resp.json())
+const fetchRawSource = async () => fetch(RAW_DATA_SOURCE).then(resp => resp.json())
 
+router.listen(PORT, async () => {
 
-fetchSource().then(data => {
+  const routeDetails = await fetchRawSource()
   connectMongo()
 
-  router.listen(PORT, () => {
-    try {
-      global.routeList = Object.values(data.routeList)
-      global.stopList = data.stopList
-      
-      initMiddlewares(router)
-      printInfo(`Server running at port ${PORT}...`)
+  try {
+    global.routeList = Object.values(routeDetails.routeList)
+    global.stopList = routeDetails.stopList
+    
+    initMiddlewares(router)
+    printInfo(`Server running at port ${PORT}...`)
 
-      startCronjob()
-    }
-    catch (err) {
-      printError(err)
-    } 
-  })
+    startCronjob()
+  }
+  catch (err) {
+    printError(err)
+  } 
 })

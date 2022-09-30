@@ -12,7 +12,9 @@ const regex = {
   startFrom9: /(^9)(\d|[A-Z]){2,4}/ // Start with '9', with immidiate subsequent 2 digits, and optional character alphabet
 }
 
-const isNull = v => v === null || v === undefined
+const isFalsy = v => v === "" || v === null || v === undefined
+
+const hasFalsy = (...params) => params.reduce((curr, param) => curr ? curr : isFalsy(param), false)
 
 const strToTime = (str, format = "$1:$2") => str.replace(regex.isFourDigit, format)
 
@@ -22,5 +24,5 @@ const toSentenceCase = str => str.replace(regex.sentenceCase, ch => ch.toLowerCa
 
 const currentDateTime = () => format(utcToZonedTime(new Date(), "Asia/Hong_Kong"), "yyyy/MM/dd H:mm:ss")
 
-module.exports = {fetch, isNull, strToTime, secToMin, toSentenceCase, currentDateTime}
+module.exports = {fetch, isFalsy, hasFalsy, strToTime, secToMin, toSentenceCase, currentDateTime}
 

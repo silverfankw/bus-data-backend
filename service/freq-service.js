@@ -1,4 +1,4 @@
-const {isNull, strToTime, secToMin} = require("../util/common")
+const {isFalsy, strToTime, secToMin} = require("../util/common")
 
 const freqMap = {
   "31": "Monday - Friday (NLB 11)",
@@ -15,13 +15,13 @@ const destructureFreqRange = freqRange =>
   Object.entries(freqRange).map(freq => {
     const [from, to, interval = "Fixed Departure"] = freq.flat()
 
-    if (isNull(to)) return {time_range: `${strToTime(from)}`, interval}
+    if (isFalsy(to)) return {time_range: `${strToTime(from)}`, interval}
     else return {time_range: `${strToTime(from)} - ${strToTime(to)}`, interval: `${secToMin(interval)} mins`}
   })
 
 
 const getFrequency = freqGrp => 
-isNull (freqGrp) ? {} :
+isFalsy (freqGrp) ? {} :
 Object.entries(freqGrp).map(freqData => {
   const dayType = freqMap[freqData[0]]
   const dayOfWeekFreq = freqData[1]

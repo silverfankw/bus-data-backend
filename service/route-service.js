@@ -1,7 +1,9 @@
+const { SPECIAL_SERVICE_SOURCE } = process.env
+
 const { stringifyCompany } = require("./co-service") 
 const { batchTranslateStop } = require("./stop-service")
 const { getFrequency } = require("./freq-service")
-const { toSentenceCase, isNull } = require("../util/common")
+const { toSentenceCase, isFalsy, fetch } = require("../util/common")
 const { printRouteDetails } = require("../util/logger")
 
 const color = require("../util/color_def")
@@ -21,7 +23,7 @@ const getRouteList = (co, rts) => {
     dest: {...rt.dest, en: toSentenceCase(rt.dest.en)}
   }))
 
-  if (isNull(co)) return mapRoute(rts)
+  if (isFalsy(co)) return mapRoute(rts)
   else return mapRoute(filterRoute(rts))
 }
 
@@ -55,6 +57,14 @@ const buildRtDetails = (rt, selectedCo) => {
     }
   )
 }
+
+
+const getRouteSpecialService = async (rt, bound) => {
+  const special_service = await fetch(`${SPECIAL_SERVICE_SOURCE}&route=${rt}&bound=${bound}`).then(resp => resp.json())
+  console.log(special_service)
+  return special_service
+}
+
 
 const getRouteBgColor = (rt, co) => {
   // Get only the first company
@@ -95,4 +105,4 @@ const getRouteTextColor = (rt, co) => {
   }
 }
 
-module.exports = { getRouteList, buildRt, buildRtDetails, getRouteBgColor, getRouteTextColor}
+module.exports = { getRouteList, buildRt, buildRtDetails, getRouteBgColor, getRouteTextColor, getRouteSpecialService}

@@ -5,7 +5,7 @@ const { getRouteBgColor, getRouteTextColor } = require("./route-service")
 const { stringifyCompany } = require("./co-service") 
 const { batchTranslateStop } = require("./stop-service")
 const { getFrequency } = require("./freq-service")
-const { toSentenceCase, isNull } = require("../util/common")
+const { toSentenceCase, isFalsy } = require("../util/common")
 
 
 
