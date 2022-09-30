@@ -1,6 +1,8 @@
 const { IS_LWB_ROUTE } = require("../util/route_def")
 const { companyMap } = require("../util/company_def")
 
+const getCompanyList = () => Object.entries(companyMap).map((entry) => ({en: entry[0].toUpperCase(), zh: entry[1]}))
+
 const stringifyCompany = (rt, companyArr) => companyArr.reduce((result, company, index) => {
     const is_lwb_route = IS_LWB_ROUTE(rt) && company === 'kmb'
     return { 
@@ -9,4 +11,4 @@ const stringifyCompany = (rt, companyArr) => companyArr.reduce((result, company,
     }}
 , {en: "", zh: ""})
 
-module.exports = { stringifyCompany }
+module.exports = { stringifyCompany, getCompanyList }
