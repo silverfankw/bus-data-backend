@@ -16,7 +16,7 @@ const EGYPTIAN_BLUE = "#1034A6"
 
 const ROYAL_BLUE = "#111E6C"
 
-const PURPLE = "#9F0FFF"
+const PURPLE = "#55298C"
 
 const BLACK = "#000000"
 
